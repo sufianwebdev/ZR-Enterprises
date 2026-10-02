@@ -1,0 +1,11 @@
+{
+  "name": "zr-enterprises-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static company website for ZR Enterprises, Lahore",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check script.js && node --check scripts/serve.mjs"
+  }
+}
