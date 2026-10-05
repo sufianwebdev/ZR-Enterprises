@@ -1,3 +1,21 @@
+const pageLoader = document.querySelector('.page-loader');
+if (pageLoader) {
+  let exitScheduled = false;
+  const dismissPageLoader = () => {
+    if (exitScheduled) return;
+    exitScheduled = true;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wait = reducedMotion ? 0 : Math.max(0, 650 - performance.now());
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('has-page-loader');
+      window.setTimeout(() => pageLoader.remove(), reducedMotion ? 0 : 450);
+    }, wait);
+  };
+  if (document.readyState === 'complete') dismissPageLoader();
+  else window.addEventListener('load', dismissPageLoader, { once: true });
+  window.setTimeout(dismissPageLoader, 2500);
+}
+
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#main-nav');
 
@@ -115,6 +133,29 @@ if (brandSlider) {
   toggle.addEventListener('click', () => {
     const paused = brandSlider.classList.toggle('is-paused');
     toggle.setAttribute('aria-label', paused ? 'Resume brand slider' : 'Pause brand slider');
+    toggle.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
+  });
+}
+
+// The profile's sector logos form one continuous, user-controllable track.
+// A visual-only copy keeps the loop seamless without repeating logos for screen readers.
+const sectorLogoShowcase = document.querySelector('.sector-logo-showcase');
+if (sectorLogoShowcase) {
+  const track = sectorLogoShowcase.querySelector('.sector-logo-track');
+  const group = sectorLogoShowcase.querySelector('.sector-logo-group');
+  const toggle = sectorLogoShowcase.querySelector('.sector-logo-toggle');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const copy = group.cloneNode(true);
+  copy.setAttribute('aria-hidden', 'true');
+  copy.querySelectorAll('img').forEach(img => { img.alt = ''; });
+  track.append(copy);
+  sectorLogoShowcase.classList.add('is-ready');
+  const syncPreference = () => { toggle.hidden = reducedMotion.matches; };
+  syncPreference();
+  reducedMotion.addEventListener('change', syncPreference);
+  toggle.addEventListener('click', () => {
+    const paused = sectorLogoShowcase.classList.toggle('is-paused');
+    toggle.setAttribute('aria-label', paused ? 'Resume organization logo slider' : 'Pause organization logo slider');
     toggle.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
   });
 }

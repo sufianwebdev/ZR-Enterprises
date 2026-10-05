@@ -85,3 +85,19 @@ The brand strip scrolls continuously, pauses on hover or keyboard focus, and inc
 ## Typography and coverage styling
 
 Business Coverage uses white cards, inset photographs, navy headings and soft blue icons on the existing cream background. Text sizes are increased across navigation, body copy, cards, forms and footer. Mobile forms use one column and 16px inputs. Navigation switches to its mobile layout at 900px. Responsive layout and contact interactions were rechecked after these changes.
+
+## Social profiles
+
+The supplied WhatsApp Channel, Facebook, Instagram and LinkedIn links appear as accessible icon links in both the header strip and footer. The same profiles are included in LocalBusiness structured data. Their URLs can be updated in `index.html`. WhatsApp Channel is distinct from the existing direct-chat buttons.
+
+## Sector overview
+
+The original “Different businesses. The same care.” six-sector overview is restored before the photographic Business Coverage cards. Both sections remain on the page.
+
+## Sector logo slider
+
+The “Sectors We Support” section includes 21 organizations from page 6 of the supplied company profile. Fifteen displayed logos now use clearer local assets from the organizations' own sites or official profile (the Beaconhouse mark is rendered from its official PDF). The other six retain the profile extraction because an exact, verifiable higher-resolution source was not found. Asset-by-asset links and exceptions are in `assets/sector-logo-sources.md`. The slider pauses on hover or via its button, and reduced-motion settings show a manually scrollable logo row. The heading does not claim a client relationship.
+
+## Page loader
+
+The home page briefly shows the existing ZR Enterprises full logo with a subtle progress-line animation. It dismisses after page load, with a short minimum display and a timeout fallback. Reduced-motion visitors see a static logo, and the loader stays hidden when JavaScript is disabled. The logo is loaded from a local asset.
